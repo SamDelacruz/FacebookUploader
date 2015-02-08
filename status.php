@@ -3,47 +3,26 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 require_once __DIR__ . '/vendor/autoload.php';
 session_start();
-use Facebook\FacebookRequestException;
-use Facebook\FacebookRequest;
-use Facebook\FacebookSession;
+use Uploader\FBPostHandler;
 
-$app_id       = '1409910789303690';
-$app_secret   = '161ca6547ad7742302bba61a5c152f54';
-
-FacebookSession::setDefaultApplication( $app_id, $app_secret );
-
-if(!$_SESSION['fb_loggedIn'] || !isset($_POST['fb_status'])) {
-    //Redirect unless POST request contains status, and user is logged in
-    header('Location: index.php');
+if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
+    http_response_code(403);
+    echo '<h1>403 Forbidden</h1>';
 } else {
-    
-    $status = $_POST['fb_status'];
-    try {
-        $session = new FacebookSession($_SESSION['fb_access_token']);
-    } catch(FacebookRequestException $ex) {
-        print_r($ex);
-    } catch(Exception $ex) {
-        print_r($ex);
-    }
-    
-    if(isset($session)) {
-        $message = $_POST['fb_status'];
-        
-        if(!is_string($message)) {
-            echo '400 BAD REQUEST';
-        } else {
-            $response = (new FacebookRequest(
-                $session, 'POST', '/me/feed', array(
-                    'message' => $message
-                )
-            ))->execute()->getGraphObject()->getProperty('id');
-            print_r($response);
-
-        }
-
+    if(!isset($_SESSION['fb_access_token']) || !isset($_POST['fb_status'])) {
+        http_response_code(400);
     } else {
-        echo '401 UNAUTHORIZED';
+        $status = $_POST['fb_status'];
+        $response = (new FBPostHandler(
+            $_SESSION['fb_access_token']
+        ))->postStatus($status);
+        $hasPosted = !strpos($response, '_') === false;
+        if($hasPosted) {
+            $split = explode('_', $response);
+            $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
+            echo $postUrl;
+        } else {
+            echo $response;
+        }
     }
-
-    
 }

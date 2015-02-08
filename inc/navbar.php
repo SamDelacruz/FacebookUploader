@@ -1,3 +1,10 @@
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+require_once __DIR__ . '/../vendor/autoload.php';
+use Uploader\FBUser;
+?>
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -15,18 +22,18 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
-                    if(!$_SESSION['fb_loggedIn']) {
+                    if(!isset($_SESSION['fb_access_token'])) {
                         echo '<li><a href="login.php">Login with Facebook</a></li>';
                     } else {
-                        echo '<li class="dropdown">';
-                            echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">'
-                                . '<img class="img-circle" width="18px" height="18px" src="'. $_SESSION['fb_picture_url'] .'" />&nbsp;'
-                                . $_SESSION['fb_first_name'] . ' ' . $_SESSION['fb_last_name'] . '<span class="caret"></span></a>';
-                            echo '<ul class="dropdown-menu" role="menu">';
-                            echo '<li><a href="' . $_SESSION['fb_logoutURL'] . '">Logout</a></li>';
-                            echo '</ul>';
-                        echo '</li>';
-                        
+                        $user = new FBUser($_SESSION['fb_access_token']);
+                        echo '<li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <img class="img-circle" width="18px" height="18px" src="'. $user->getPictureUrl() .'" />&nbsp;'
+                                . $user->getFirstName() . ' ' . $user->getLastName() . '<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                <li><a href="' . $_SESSION['fb_logout_url'] . '">Logout</a></li>
+                                </ul>
+                            </li>';
                     }
                 ?>
                 
