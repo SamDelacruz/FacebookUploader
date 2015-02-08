@@ -33,14 +33,18 @@ class FBPostHandler {
             if(!$this->session->validate()) {
                 throw new \RuntimeException("Invalid Session");
             }
-            $response = (new FacebookRequest(
-                $this->session, 'POST', '/me/feed', array(
-                    'message' => $message
-                )
-            ))->execute()->getGraphObject()->getProperty('id');
+            try {
+                $response = (new FacebookRequest(
+                    $this->session, 'POST', '/me/feed', array(
+                        'message' => $message
+                    )
+                ))->execute()->getGraphObject()->getProperty('id');
+            } catch (FacebookRequestException $e) {
+                $response = $e->getMessage();
+            }
             return $response;
         } else {
-            throw new \BadMethodCallException("Invalid Message");
+            throw new \RuntimeException("Invalid Message");
         }
     }
     

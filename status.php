@@ -1,9 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 require_once __DIR__ . '/vendor/autoload.php';
 session_start();
 use Uploader\FBPostHandler;
+use Facebook\FacebookRequestException;
 
 if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
     http_response_code(403);
@@ -13,16 +12,24 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
         http_response_code(400);
     } else {
         $status = $_POST['fb_status'];
-        $response = (new FBPostHandler(
-            $_SESSION['fb_access_token']
-        ))->postStatus($status);
+        try{
+            $response = (new FBPostHandler(
+                $_SESSION['fb_access_token']
+            ))->postStatus($status);
+        } catch (FacebookRequestException $ex) {
+            echo json_encode($ex->asArray());
+        } catch (Exception $ex) {
+            echo json_encode($ex->asArray());
+        }
         $hasPosted = !strpos($response, '_') === false;
         if($hasPosted) {
             $split = explode('_', $response);
             $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
-            echo $postUrl;
+            $success = ['url' => $postUrl];
+            echo json_encode($success);
         } else {
-            echo $response;
+            $error = ['error' => $response];
+            echo json_encode($error);
         }
     }
 }

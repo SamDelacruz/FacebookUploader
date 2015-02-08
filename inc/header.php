@@ -14,6 +14,8 @@ session_start();
 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Fileinput -->
+    <link href="vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <!-- Custom styles -->
     <link href="css/styles.css" rel="stylesheet">
 

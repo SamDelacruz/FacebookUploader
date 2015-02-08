@@ -15,7 +15,8 @@ class FBConfig {
         'email',
         'user_location',
         'user_birthday',
-        'publish_actions');
+        'publish_actions',
+        'read_stream');
     
     static function getPermissions() {
         return self::$permissions;
