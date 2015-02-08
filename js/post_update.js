@@ -13,13 +13,18 @@ var post_update = function() {
 };
 
 var post_callback = function(data) {
-    console.log('sent');
-    $(".result").html(data);
+    var output = "";
+    if(data.indexOf("http://") > -1) {
+        output = '<a target="_blank" href="' + data + '">View on Facebook</a>';
+    } else {
+        output = "<pre>" + data + "</pre>";
+    }
+    $(".result").html(output);
     $(".result").removeClass("hidden");
 };
 
 var post_callback_fail = function(data) {
-    console.log('fail');
-    $(".result").html(data);
-    $(".result").removeClass("hidden");;
+    var output = "<pre>" + data + "</pre>";
+    $(".result").html(output);
+    $(".result").removeClass("hidden");
 };
