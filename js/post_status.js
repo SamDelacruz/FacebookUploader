@@ -1,7 +1,6 @@
 var post_update = function() {
     var fb_status = document.getElementById('fb_status').value;
     document.getElementById('fb_status').value = '';
-    console.log(fb_status);
     $.ajax({
         'type': "POST",
         'url': "http://localhost:8888/status.php",
@@ -14,8 +13,9 @@ var post_update = function() {
 
 var post_callback = function(data) {
     var output = "";
-    if(data.indexOf("http://") > -1) {
-        output = '<a target="_blank" href="' + data + '">View on Facebook</a>';
+    var parsedData = JSON.parse(data);
+    if(parsedData.url) {
+        output = '<strong>Post Successful: </strong><a target="_blank" href="' + parsedData.url + '">View on Facebook</a>';
     } else {
         output = "<pre>" + data + "</pre>";
     }

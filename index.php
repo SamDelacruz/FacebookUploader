@@ -21,11 +21,19 @@ if(!isset($_SESSION['fb_access_token'])) {
     //Parse the type, ie text, image, both
     switch ($_GET['type']) {
         case 'text':
-            include 'views/submit_post.html';
+            include 'views/post_status.html';
             break;
+        case 'photo':
+            include 'views/post_photo.html';
+            break;
+        case 'overlay':
+            include 'views/post_overlay.html';
+            break;
+        default:
+            include 'views/welcome_authed.html';
     }
 } else {
-    include 'views/submit_image.html';
+    include 'views/welcome_authed.html';
 }
 
 ?>
