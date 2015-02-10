@@ -84,38 +84,41 @@ $response_stack['imageUrl'] = $target;
 $response_stack['mode'] = $mode;
 
 if ($success === true) {
-    $image = imagecreatefromfile($target);
-    $white = imagecolorallocate($image, 255,255,255);
-    $black = imagecolorallocate($image, 0,0,0);
-    $font_path = "../fonts/Cabin-Medium.ttf";
-
-    $img_width = imagesx($image);
-    $img_height = imagesy($image);
     
-    $font_size = 1;
-    $txt_max_width = intval(0.8 * $img_width);
+    if(strlen($fb_overlay_text) > 0) {
+        $image = imagecreatefromfile($target);
+        $white = imagecolorallocate($image, 255,255,255);
+        $black = imagecolorallocate($image, 0,0,0);
+        $font_path = "../fonts/Cabin-Medium.ttf";
 
-    do {
-        $font_size++;
-        $p = imagettfbbox($font_size,0,$font_path,$fb_overlay_text);
-        $txt_width=$p[2]-$p[0];
-    } while ($txt_width <= $txt_max_width);
+        $img_width = imagesx($image);
+        $img_height = imagesy($image);
 
-    $y = $img_height * 0.9;
-    $x = ($img_width - $txt_width) / 2;
-    $stroke_width = floor($font_size * 0.03125);
+        $font_size = 1;
+        $txt_max_width = intval(0.8 * $img_width);
 
-    // Draw the border
-    ImageTTFText($image, $font_size, 0, $x + $stroke_width, $y, $black, $font_path, $fb_overlay_text);
-    ImageTTFText($image, $font_size, 0, $x - $stroke_width, $y, $black, $font_path, $fb_overlay_text);
-    ImageTTFText($image, $font_size, 0, $x, $y + $stroke_width, $black, $font_path, $fb_overlay_text);
-    ImageTTFText($image, $font_size, 0, $x, $y - $stroke_width, $black, $font_path, $fb_overlay_text);
-    
-    // Draw the message
-    ImageTTFText($image, $font_size, 0, $x, $y, $white, $font_path, $fb_overlay_text);
-    
-    saveImage($image, $target);
-    imagedestroy($image);
+        do {
+            $font_size++;
+            $p = imagettfbbox($font_size,0,$font_path,$fb_overlay_text);
+            $txt_width=$p[2]-$p[0];
+        } while ($txt_width <= $txt_max_width);
+
+        $y = $img_height * 0.9;
+        $x = ($img_width - $txt_width) / 2;
+        $stroke_width = floor($font_size * 0.03125);
+
+        // Draw the border
+        ImageTTFText($image, $font_size, 0, $x + $stroke_width, $y, $black, $font_path, $fb_overlay_text);
+        ImageTTFText($image, $font_size, 0, $x - $stroke_width, $y, $black, $font_path, $fb_overlay_text);
+        ImageTTFText($image, $font_size, 0, $x, $y + $stroke_width, $black, $font_path, $fb_overlay_text);
+        ImageTTFText($image, $font_size, 0, $x, $y - $stroke_width, $black, $font_path, $fb_overlay_text);
+
+        // Draw the message
+        ImageTTFText($image, $font_size, 0, $x, $y, $white, $font_path, $fb_overlay_text);
+
+        saveImage($image, $target);
+        imagedestroy($image);
+    }
 
     if($mode === 'publish') {
         try{
