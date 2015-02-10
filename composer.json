@@ -1,0 +1,22 @@
+{
+    "name": "Challenge/Uploader",
+    "description": "Facebook Uploader",
+    "keywords": ["facebook", "uploader"],
+    "type": "application",
+    "authors": [
+        {
+            "name": "Sam Delacruz",
+            "homepage": "http://samdlc.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "facebook/php-sdk-v4" : "4.0.*",
+        "kartik-v/bootstrap-fileinput": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Uploader\\": "src/Uploader/"
+        }
+    }
+}
