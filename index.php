@@ -29,6 +29,9 @@ if(!isset($_SESSION['fb_access_token'])) {
         case 'overlay':
             include 'views/post_overlay.html';
             break;
+        case 'soap':
+            include 'views/soap_details.html';
+            break;
         default:
             include 'views/welcome_authed.html';
     }
