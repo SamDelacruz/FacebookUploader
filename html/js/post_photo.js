@@ -3,7 +3,7 @@ $("#fb_image").fileinput(({
     'showPreview': false,
     'allowedFileExtensions' : ['jpg', 'jpeg', 'png','gif'],
     'maxFilesNum' : 1,
-    'uploadUrl' : 'http://localhost:8888/photo.php',
+    'uploadUrl' : '/photo.php',
     'dropZoneEnabled' : false,
     'layoutTemplates' : {
         actionUpload: ''
