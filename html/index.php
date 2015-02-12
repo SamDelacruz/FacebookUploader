@@ -35,7 +35,7 @@ if(!isset($_SESSION['fb_access_token'])) {
             include '../views/welcome_authed.html';
     }
 } else {
-    include 'views/welcome_authed.html';
+    include '../views/welcome_authed.html';
 }
 
 ?>
