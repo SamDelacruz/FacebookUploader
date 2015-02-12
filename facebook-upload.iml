@@ -5,7 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
-      <excludeFolder url="file://$MODULE_DIR$/htdocs/vendor/kartik-v/bootstrap-fileinput" />
+      <excludeFolder url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -22,13 +22,13 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/htdocs/vendor/kartik-v/bootstrap-fileinput" />
+          <root url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/htdocs/vendor/kartik-v/bootstrap-fileinput" />
+          <root url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
         </SOURCES>
