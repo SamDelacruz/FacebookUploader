@@ -130,7 +130,7 @@ if ($success === true) {
         } catch (RuntimeException $ex) {
             echo json_encode($ex->asArray());
         }
-        $hasPosted = !strpos($response, 'photoId') === false;
+        $hasPosted = !strpos($response, 'Id') === false;
         if($hasPosted) {
             $split = explode(':', $response);
             $response_stack = ['success' => $split[1]];

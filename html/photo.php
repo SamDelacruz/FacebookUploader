@@ -40,7 +40,7 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
             } catch (RuntimeException $ex) {
                 echo json_encode($ex->asArray());
             }
-            $hasPosted = !strpos($response, 'photoId') === false;
+            $hasPosted = !strpos($response, 'Id') === false;
             if($hasPosted) {
                 $split = explode(':', $response);
                 $success = ['success' => $split[1]];
