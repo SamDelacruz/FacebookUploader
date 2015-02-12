@@ -13,8 +13,7 @@ class FBConfig {
     const HOST_ROOT = 'http://fb.samdlc.com/';
     private static $permissions = array (
         'email',
-        'publish_actions',
-        'read_stream');
+        'publish_actions');
     
     static function getPermissions() {
         return self::$permissions;

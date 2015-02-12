@@ -40,11 +40,10 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
             } catch (RuntimeException $ex) {
                 echo json_encode($ex->asArray());
             }
-            $hasPosted = !strpos($response, '_') === false;
+            $hasPosted = !strpos($response, 'photoId') === false;
             if($hasPosted) {
-                $split = explode('_', $response);
-                $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
-                $success = ['url' => $postUrl];
+                $split = explode(':', $response);
+                $success = ['success' => $split[1]];
                 $output =  json_encode($success);
             } else {
                 $error = ['error' => $response];

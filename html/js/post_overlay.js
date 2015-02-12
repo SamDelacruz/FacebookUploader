@@ -34,8 +34,8 @@ var sendRequest = function(mode) {
             $('#preview-button').removeClass('disabled');
             $('#publish-button').removeClass('disabled');
             var output = "";
-            if(resp.url) {
-                output = '<strong>Post Successful: </strong><a target="_blank" href="' + resp.url + '">View on Facebook</a>';
+            if(resp.success) {
+                output = '<strong>Post Successful!</strong>';
             } else {
                 output = "<pre>" + data + "</pre>";
             }

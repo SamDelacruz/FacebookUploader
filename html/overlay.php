@@ -130,11 +130,10 @@ if ($success === true) {
         } catch (RuntimeException $ex) {
             echo json_encode($ex->asArray());
         }
-        $hasPosted = !strpos($response, '_') === false;
+        $hasPosted = !strpos($response, 'photoId') === false;
         if($hasPosted) {
-            $split = explode('_', $response);
-            $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
-            $response_stack['url'] = $postUrl;
+            $split = explode(':', $response);
+            $response_stack = ['success' => $split[1]];
         } else {
             $response_stack['error'] = $response;
         }

@@ -34,16 +34,7 @@ class FBPhotoHandler {
                     $this->session, 'GET', '/me/feed'
                 ))->execute()->getGraphObjectList();
 
-                $response = "";
-                foreach($recentPosts as $post) {
-                    $postArray = $post->asArray();
-                    if(isset($postArray['object_id'])) {
-                        if($postArray['object_id'] === $photoId) {
-                            $response = $postArray['id'];
-                            break;
-                        }
-                    }
-                }
+                $response = "photoId:" . $photoId;
                 
             } catch(FacebookRequestException $ex) {
                 $response = $ex->getMessage();

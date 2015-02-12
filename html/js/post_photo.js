@@ -17,8 +17,8 @@ $('#fb_image').on('filebatchuploadsuccess', function(event, data) {
     document.getElementById('fb_status').value = '';
     var response = data.response;
     var parsedData = JSON.parse(response);
-    if(parsedData.url) {
-        output = '<strong>Post Successful: </strong><a target="_blank" href="' + parsedData.url + '">View on Facebook</a>';
+    if(parsedData.success) {
+        output = '<strong>Post Successful!</strong>';
     } else {
         output = "<pre>" + data + "</pre>";
     }

@@ -3,9 +3,9 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
-      <excludeFolder url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -22,15 +22,13 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
-          <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/html/kartik-v/bootstrap-fileinput" />
-          <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/facebook/php-sdk-v4" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
         </SOURCES>
       </library>
     </orderEntry>
