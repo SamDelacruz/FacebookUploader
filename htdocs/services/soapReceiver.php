@@ -1,5 +1,5 @@
 <?php
-require_once( __DIR__ . '/../vendor/autoload.php' );
+require_once( __DIR__ . '/../../vendor/autoload.php' );
 use Uploader\Services\SoapReceiver;
 use Uploader\Utils\DatabaseAdapter;
 
@@ -24,7 +24,7 @@ class SoapReceiverWrapper {
     }
 }
 
-$dbconfig = parse_ini_file(__DIR__ . "/../config/dbconfig.ini");
+$dbconfig = parse_ini_file(__DIR__ . "/../../config/dbconfig.ini");
 $dbHost = $dbconfig['host'];
 $dbPort = $dbconfig['port'];
 $dbName = $dbconfig['database_name'];
@@ -43,7 +43,7 @@ if(isset($dbconfig)) {
     }
     else {
         if (isset($_SERVER['QUERY_STRING']) && strcasecmp($_SERVER['QUERY_STRING'], 'wsdl') === 0) {
-            $wsdl = @implode('', @file('wsdl/receiver.wsdl'));
+            $wsdl = @implode('', file('wsdl/receiver.wsdl'));
             if (strlen($wsdl) > 1) {
                 header("Content-type: text/xml");
                 echo $wsdl;

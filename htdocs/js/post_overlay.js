@@ -28,7 +28,6 @@ var sendRequest = function(mode) {
     xhr.onload = function() {
         if(this.status == 200) {
             var resp = JSON.parse(this.response);
-            console.log("server received: ", resp);
             var image = document.createElement('img');
             $('#img-target').attr('src', resp.imageUrl);
             $('#img-target').removeClass('hidden');

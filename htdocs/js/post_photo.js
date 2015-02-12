@@ -27,7 +27,6 @@ $('#fb_image').on('filebatchuploadsuccess', function(event, data) {
 });
 
 $('#fb_image').on('filebrowse', function(event) {
-    console.log("file browse triggered");
     $(".result").html("");
     $(".result").addClass("hidden");
 });
