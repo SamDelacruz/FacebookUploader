@@ -57,7 +57,7 @@
     </binding>
     <service name="SoapReceiverService">
         <port name="SoapReceiverPort" binding="SoapReceiverBinding">
-            <soap:address location="http://localhost:8888/services/SoapReceiver.php"/>
+            <soap:address location="http://fb.samdlc.com/services/SoapReceiver.php"/>
         </port>
     </service>
 </definitions>
