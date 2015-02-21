@@ -14,6 +14,11 @@ include __DIR__ . '/../inc/header.php';
 
 <?php
 
+/*
+ * Lock user out unless they are authenticated
+ * Different "pages" are accessed via /index.php?type={type}
+ * A URL rewrite filter could be used to make URLs more friendly for users.
+ */
 if(!isset($_SESSION['fb_access_token'])) {
     include '../views/welcome.html';
 } else if(isset($_GET['type'])){

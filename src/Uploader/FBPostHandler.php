@@ -14,7 +14,10 @@ use Uploader\Utils\FBConfig;
  */
 class FBPostHandler {
     private $session;
-    
+
+    /**
+     * @param $accessToken Valid Facebook Access Token
+     */
     public function __construct($accessToken) {
         FacebookSession::setDefaultApplication(FBConfig::APP_ID, FBConfig::APP_SECRET);
         $this->setSession($accessToken);
@@ -47,7 +50,11 @@ class FBPostHandler {
             throw new \RuntimeException("Invalid Message");
         }
     }
-    
+
+    /**
+     * Sets session object
+     * @param $accessToken Valid Facebook Access Token
+     */
     public function setSession($accessToken) {
         if(is_string($accessToken)) {
             try {

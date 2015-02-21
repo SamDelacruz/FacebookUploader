@@ -8,15 +8,28 @@ use Facebook\FacebookRequest;
 
 use Uploader\Utils\FBConfig;
 
+/**
+ * Class FBPhotoHandler
+ * Used to post photos to Facebook, abstracting away the details of Facebook's php SDK.
+ * @package Uploader
+ */
 class FBPhotoHandler {
 
     private $session;
 
+    /**
+     * @param $accessToken A valid Facebook Access Token
+     */
     public function __construct($accessToken) {
         FacebookSession::setDefaultApplication(FBConfig::APP_ID, FBConfig::APP_SECRET);
         $this->setSession($accessToken);
     }
 
+    /**
+     * @param $message String message to post alongside photo
+     * @param $imagePath Filepath to image to post
+     * @return string PhotoId of photo posted, or error details
+     */
     public function postPhoto($message, $imagePath) {
         if(isset($this->session) && is_string($message) && is_string($imagePath)) {
             if(!$this->session->validate()) {
@@ -46,6 +59,10 @@ class FBPhotoHandler {
         }
     }
 
+    /**
+     * Function for setting session object
+     * @param $accessToken Valid Facebook Access Token
+     */
     public function setSession($accessToken) {
         if(is_string($accessToken)) {
             try {

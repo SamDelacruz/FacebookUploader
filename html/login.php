@@ -8,6 +8,13 @@ use Facebook\FacebookRedirectLoginHelper;
 use Uploader\FBUser;
 use Uploader\Utils\FBConfig;
 
+/*
+ * Logs the user in via Facebook PHP SDK v4
+ * If there is no session active, the user will be redirected to Facebook to log in
+ * The user will be redirected back to login.php, the session stored, and user
+ * redirected back to the application homepage (index.php).
+ */
+
 // Facebook app settings
 $app_id = FBConfig::APP_ID;
 $app_secret = FBConfig::APP_SECRET;

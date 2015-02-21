@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 require_once __DIR__ . '/../vendor/autoload.php';
 session_start();
 use Uploader\FBPhotoHandler;
@@ -22,7 +20,8 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
         $ext = explode('.', basename($images['name']));
         $target = "uploads" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
         $success = null;
-
+    
+        // Try to store image in /uploads
         if(move_uploaded_file($images['tmp_name'], $target)) {
             $success = true;
         } else{
@@ -40,6 +39,7 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
             } catch (RuntimeException $ex) {
                 echo json_encode($ex->asArray());
             }
+            //Parse response
             $hasPosted = !strpos($response, 'Id') === false;
             if($hasPosted) {
                 $split = explode(':', $response);
