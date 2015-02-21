@@ -1,5 +1,5 @@
 <?php
-use Uploader\Utils\FBConfig;
+// Destroy the session
 session_start();
 session_unset();
 session_destroy();

@@ -3,7 +3,7 @@ $("#fb_image").fileinput(({
     'showPreview': false,
     'allowedFileExtensions' : ['jpg', 'jpeg', 'png','gif'],
     'maxFilesNum' : 1,
-    'uploadUrl' : 'http://localhost:8888/photo.php',
+    'uploadUrl' : '/photo.php',
     'dropZoneEnabled' : false,
     'layoutTemplates' : {
         actionUpload: ''
@@ -17,8 +17,8 @@ $('#fb_image').on('filebatchuploadsuccess', function(event, data) {
     document.getElementById('fb_status').value = '';
     var response = data.response;
     var parsedData = JSON.parse(response);
-    if(parsedData.url) {
-        output = '<strong>Post Successful: </strong><a target="_blank" href="' + parsedData.url + '">View on Facebook</a>';
+    if(parsedData.success) {
+        output = "<strong>Post Successful!</strong>";
     } else {
         output = "<pre>" + data + "</pre>";
     }
@@ -27,7 +27,6 @@ $('#fb_image').on('filebatchuploadsuccess', function(event, data) {
 });
 
 $('#fb_image').on('filebrowse', function(event) {
-    console.log("file browse triggered");
     $(".result").html("");
     $(".result").addClass("hidden");
 });

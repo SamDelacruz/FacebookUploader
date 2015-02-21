@@ -8,6 +8,11 @@ use Facebook\FacebookRequest;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequestException;
 
+/**
+ * Class FBUser
+ * Class represents a Facebook user's profile
+ * @package Uploader
+ */
 class FBUser {
     private $session;
     private $loggedIn = false;
@@ -16,7 +21,11 @@ class FBUser {
     private $firstName;
     private $lastName;
     private $pictureUrl;
-    
+
+    /**
+     * @param $accessToken Valid Facebook Access Token
+     * @throws FacebookRequestException
+     */
     public function __construct($accessToken) {
         FacebookSession::setDefaultApplication(FBConfig::APP_ID, FBConfig::APP_SECRET);
         $this->setSession($accessToken);
@@ -36,6 +45,10 @@ class FBUser {
     }
 
 
+    /**
+     * Sets session object
+     * @param $accessToken Valid Facebook Access Token
+     */
     public function setSession($accessToken) {
         if(is_string($accessToken)) {
             try {

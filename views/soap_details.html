@@ -1,8 +1,11 @@
 <div class="jumbotron">
-    <h1> Facebook Uploader: SOAP Interface</h1>
-    <h3>Use the following access token when making your request:</h3>
+    <h1>Facebook Uploader: SOAP Interface</h1>
+    <h4>Use the following access token when making your request:</h4>
     <div class="form-group">
         <label>Access Token</label>
         <input class="form-control input-large" value="<?=$_SESSION['fb_access_token']?>"/>
     </div>
+    <p>
+        To post a Facebook status via SOAP protocol, use this <a href="services/soapReceiver.php?WSDL" target="_blank">WSDL</a>
+    </p>
 </div>

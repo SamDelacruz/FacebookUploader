@@ -1,7 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 session_start();
 use Uploader\FBPhotoHandler;
 use Facebook\FacebookRequestException;
@@ -22,7 +20,8 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
         $ext = explode('.', basename($images['name']));
         $target = "uploads" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
         $success = null;
-
+    
+        // Try to store image in /uploads
         if(move_uploaded_file($images['tmp_name'], $target)) {
             $success = true;
         } else{
@@ -40,11 +39,11 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
             } catch (RuntimeException $ex) {
                 echo json_encode($ex->asArray());
             }
-            $hasPosted = !strpos($response, '_') === false;
+            //Parse response
+            $hasPosted = !strpos($response, 'Id') === false;
             if($hasPosted) {
-                $split = explode('_', $response);
-                $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
-                $success = ['url' => $postUrl];
+                $split = explode(':', $response);
+                $success = ['success' => $split[1]];
                 $output =  json_encode($success);
             } else {
                 $error = ['error' => $response];

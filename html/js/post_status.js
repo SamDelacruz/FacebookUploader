@@ -3,7 +3,7 @@ var post_update = function() {
     document.getElementById('fb_status').value = '';
     $.ajax({
         'type': "POST",
-        'url': "http://localhost:8888/status.php",
+        'url': "/status.php",
         'data': {'fb_status': fb_status},
         'success': post_callback,
         'fail': post_callback_fail

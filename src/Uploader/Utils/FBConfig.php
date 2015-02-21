@@ -10,13 +10,10 @@ namespace Uploader\Utils;
 class FBConfig {
     const APP_ID = '1409910789303690';
     const APP_SECRET = '161ca6547ad7742302bba61a5c152f54';
-    const HOST_ROOT = 'http://localhost:8888/';
+    const HOST_ROOT = 'http://fb.samdlc.com/';
     private static $permissions = array (
         'email',
-        'user_location',
-        'user_birthday',
-        'publish_actions',
-        'read_stream');
+        'publish_actions');
     
     static function getPermissions() {
         return self::$permissions;

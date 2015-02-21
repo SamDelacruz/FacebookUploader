@@ -1,11 +1,11 @@
 <?php
-require_once( __DIR__ . '/../vendor/autoload.php' );
+require_once( __DIR__ . '/../../vendor/autoload.php' );
 use Uploader\Services\SoapReceiver;
 use Uploader\Utils\DatabaseAdapter;
 
 /**
  * Class SoapReceiverWrapper a thin wrapper around Uploader\Services\SoapReceiver
- * Have to do this in order to pass class by name to SoapServer.
+ * Needed to pass class by name to SoapServer.
  */
 class SoapReceiverWrapper {
     
@@ -24,7 +24,10 @@ class SoapReceiverWrapper {
     }
 }
 
-$dbconfig = parse_ini_file(__DIR__ . "/../config/dbconfig.ini");
+/*
+ * Load database configuration
+ */
+$dbconfig = parse_ini_file(__DIR__ . "/../../config/dbconfig.ini");
 $dbHost = $dbconfig['host'];
 $dbPort = $dbconfig['port'];
 $dbName = $dbconfig['database_name'];
@@ -34,16 +37,18 @@ $dbPass = $dbconfig['password'];
 
 if(isset($dbconfig)) {
     ini_set("soap.wsdl_cache_enabled", "0");
+    //Load WSDL and set message handler
     $server = new SoapServer("wsdl/receiver.wsdl");
     $server->setClass("SoapReceiverWrapper", new DatabaseAdapter($dbHost, $dbPort, $dbUser, $dbPass, $dbName, $dbTable));
-
+    
+    // Respond to POST request
     if (isset($_SERVER['REQUEST_METHOD']) &&
         $_SERVER['REQUEST_METHOD'] === 'POST') {
         $server->handle();
-    }
-    else {
+    } else {
+        // Output WSDL when ?WSDL is appended to GET request
         if (isset($_SERVER['QUERY_STRING']) && strcasecmp($_SERVER['QUERY_STRING'], 'wsdl') === 0) {
-            $wsdl = @implode('', @file('wsdl/receiver.wsdl'));
+            $wsdl = @implode('', file('wsdl/receiver.wsdl'));
             if (strlen($wsdl) > 1) {
                 header("Content-type: text/xml");
                 echo $wsdl;

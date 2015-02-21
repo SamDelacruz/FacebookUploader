@@ -7,6 +7,13 @@ use Uploader\Utils\iDatabaseAdapter;
 use Exception;
 use SoapFault;
 
+/**
+ * Class SoapReceiver
+ * Implementation for SOAP service.
+ * Handles operations: echoMessage(String message) and facebookPost(String accessToken, String message)
+ * Logs requests to database via iDatabaseAdapter
+ * @package Uploader\Services
+ */
 class SoapReceiver {
     
     private $dbAdapter;
@@ -14,7 +21,13 @@ class SoapReceiver {
     public function __construct(iDatabaseAdapter $dbAdapter) {
         $this->dbAdapter = $dbAdapter;
     }
-    
+
+    /**
+     * Echos request message, unless the message is 'hello world'
+     * or 'BOO!', which have their own responses.
+     * @param $inmessage the message to echo
+     * @return string response
+     */
     public function echoMessage($inmessage) {
         if(isset($inmessage) && is_string($inmessage)) {
             if(strcasecmp($inmessage, 'hello world') === 0) {
@@ -26,6 +39,14 @@ class SoapReceiver {
         return $inmessage;
     }
 
+    /**
+     * Posts a user defined message to their Facebook Timeline
+     * Logs the user's message, IP, and timestamp to Database.
+     * @param $token User's Facebook Access Token
+     * @param $message Message to post to User's Timeline
+     * @return string Post URL
+     * @throws SoapFault If invalid arguments are passed, or Facebook SDK error
+     */
     public function facebookPost($token, $message) {
         $postHandler = new FBPostHandler($token);
         if(isset($postHandler) && is_string($message)){

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 session_start();
 use Uploader\FBPostHandler;
 use Facebook\FacebookRequestException;
@@ -22,6 +22,7 @@ if(!(strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')) {
             echo json_encode($ex->asArray());
         }
         $hasPosted = !strpos($response, '_') === false;
+        // Parse response, link to post
         if($hasPosted) {
             $split = explode('_', $response);
             $postUrl = "http://facebook.com/" . $split[0] . "/posts/" . $split[1];
